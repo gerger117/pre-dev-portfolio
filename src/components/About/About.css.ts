@@ -45,7 +45,7 @@ export const inner = style({
   width: "100%",
   maxWidth: 1100,
   display: "grid",
-  gridTemplateColumns: "1fr 1fr",
+  gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
   gap: 80,
   alignItems: "center",
 
@@ -153,32 +153,20 @@ export const skillsLabel = style({
 
 export const skillsGrid = style({
   display: "grid",
-  gridTemplateColumns: "1fr 1fr",
+  gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
   gap: 12,
 
   "@media": {
-    "screen and (max-width: 480px)": {
+    "screen and (max-width: 768px)": {
       gridTemplateColumns: "1fr",
+      gap: 40,
     },
   },
 });
 
 export const skillCard = style({
-  display: "flex",
-  flexDirection: "column",
-  gap: 10,
-  padding: "20px 20px",
-  background: "rgba(255,255,255,0.04)",
-  border: "1px solid rgba(255,255,255,0.08)",
-  borderRadius: 14,
-  transition: "border-color 0.2s, background 0.2s",
-
-  selectors: {
-    "&:hover": {
-      borderColor: vars.color.purpleCore,
-      background: "rgba(92,59,255,0.08)",
-    },
-  },
+  width: "100%",
+  minWidth: 0,
 });
 
 export const skillIcon = style({

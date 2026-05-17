@@ -42,42 +42,20 @@ const bounce = keyframes({
 
 export const hero = style({
   position: "relative",
-  minHeight: "100vh",
+  minHeight: "100svh",
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",
   overflow: "hidden",
   paddingTop: 80,
+  paddingInline: 20,
 
-  // Bottom glow
-  "::before": {
-    content: '""',
-    position: "absolute",
-    bottom: "-10%",
-    left: "50%",
-    transform: "translateX(-50%)",
-    width: 760,
-    height: 560,
-    background:
-      "radial-gradient(ellipse at center, rgba(80,44,220,0.72) 0%, rgba(50,20,160,0.38) 40%, transparent 72%)",
-    pointerEvents: "none",
-    zIndex: 0,
-  },
-
-  // Top ambient glow
-  "::after": {
-    content: '""',
-    position: "absolute",
-    top: "10%",
-    left: "50%",
-    transform: "translateX(-50%)",
-    width: 900,
-    height: 200,
-    background:
-      "radial-gradient(ellipse at center, rgba(100,60,255,0.12) 0%, transparent 70%)",
-    pointerEvents: "none",
-    zIndex: 0,
+  "@media": {
+    "screen and (max-width: 768px)": {
+      paddingTop: 120,
+      justifyContent: "flex-start",
+    },
   },
 });
 
@@ -101,13 +79,20 @@ export const heroText = style({
   textAlign: "center",
   pointerEvents: "none",
   userSelect: "none",
-  marginTop: "-200px",
+  marginTop: "-120px",
+
+  "@media": {
+    "screen and (max-width: 768px)": {
+      marginTop: 0,
+      paddingTop: 40,
+    },
+  },
 });
 
 export const heroGreeting = style({
   fontFamily: vars.font.ui,
   fontWeight: 700,
-  fontSize: "clamp(2rem, 4vw, 3.2rem)",
+  fontSize: "clamp(2.5rem, 12vw, 7.8rem)",
   letterSpacing: "-0.01em",
   lineHeight: 1.1,
   color: vars.color.white,
@@ -134,7 +119,17 @@ export const personWrap = style({
   left: "50%",
   transform: "translateX(-50%)",
   zIndex: 3,
-  width: "clamp(320px, 42vw, 600px)",
+  width: "clamp(240px, 70vw, 600px)",
+
+  "@media": {
+    "screen and (max-width: 768px)": {
+      position: "relative",
+      left: "auto",
+      transform: "none",
+      width: "85%",
+      marginTop: 40,
+    },
+  },
   pointerEvents: "none",
   animation: `${riseUp} 0.9s 0.2s cubic-bezier(0.22,1,0.36,1) both`,
   // add these:
@@ -184,10 +179,11 @@ export const pill1 = style({
   animation: `${floatIn} 0.6s 0.4s ease both, ${floatY} 4s 1.2s ease-in-out infinite`,
 
   "@media": {
-    "screen and (max-width: 768px)": { left: "4%" },
+    "screen and (max-width: 768px)": {
+      display: "none",
+    },
   },
 });
-
 export const pill2 = style({
   top: "36%",
   right: "13%",
@@ -224,7 +220,7 @@ export const scrollPill = style({
   position: "absolute",
   bottom: 52,
   left: 52,
-  zIndex: 10 ,
+  zIndex: 10,
   width: 68,
   height: 68,
   borderRadius: "50%",
@@ -278,11 +274,14 @@ export const ctaRow = style({
   zIndex: 5,
   display: "flex",
   gap: 14,
-  animation: `${fadeUp} 0.7s 0.7s ease both`,
+  width: "100%",
+  justifyContent: "center",
 
   "@media": {
     "screen and (max-width: 768px)": {
-      bottom: 38,
+      flexDirection: "column",
+      width: "90%",
+      bottom: 30,
     },
   },
 });
