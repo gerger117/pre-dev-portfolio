@@ -8,10 +8,10 @@ const fadeDown = keyframes({
   to: { opacity: 1, transform: "translateY(0)" },
 });
 
-const fadeUp = keyframes({
-  from: { opacity: 0, transform: "translate(-50%, 20px)" },
-  to: { opacity: 1, transform: "translate(-50%, 0)" },
-});
+// const fadeUp = keyframes({
+//   from: { opacity: 0, transform: "translate(-50%, 20px)" },
+//   to: { opacity: 1, transform: "translate(-50%, 0)" },
+// });
 
 const fadeIn = keyframes({
   from: { opacity: 0 },

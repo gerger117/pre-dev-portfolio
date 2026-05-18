@@ -1,32 +1,50 @@
-import { useEffect } from "react";
+import { useState } from "react";
 import { projects } from "../../data/projects";
+import type { Project } from "../../data/projects";
 import { ProjectCard } from "./ProjectCard";
-import { useProjectStore } from "../../store/useProject";
 import * as styles from "./Project.css";
 
-export const Projects = () => {
-  const { projects: storeProjects, setProjects } = useProjectStore();
+type FilterOption = "All" | Project["type"];
+const filterOptions: FilterOption[] = ["All", "Web App", "Mobile App"];
 
-  useEffect(() => {
-    setProjects(projects);
-  }, [setProjects]);
+export default function Projects() {
+  const [active, setActive] = useState<FilterOption>("All");
+
+  const filtered =
+    active === "All" ? projects : projects.filter((p) => p.type === active);
 
   return (
-    <section id="projects" className={styles.wrapper}>
-      <h2
-        style={{
-          fontSize: "42px",
-          fontWeight: "bold",
-        }}
-      >
-        Featured Projects
-      </h2>
+    <section id="projects" className={styles.section}>
+      <div className={styles.inner}>
+        {/* Header */}
+        <div className={styles.header}>
+          <span className={styles.eyebrow}>My Work</span>
+          <h2 className={styles.heading}>Projects I&apos;ve Built</h2>
+          <div className={styles.divider} />
+        </div>
 
-      <div className={styles.grid}>
-        {storeProjects.map((project) => (
-          <ProjectCard key={project.id} project={project} />
-        ))}
+        {/* Filter tabs */}
+        <div className={styles.filters}>
+          {filterOptions.map((f) => (
+            <button
+              key={f}
+              className={`${styles.filterBtn} ${
+                active === f ? styles.filterBtnActive : ""
+              }`}
+              onClick={() => setActive(f)}
+            >
+              {f}
+            </button>
+          ))}
+        </div>
+
+        {/* Cards grid */}
+        <div className={styles.grid}>
+          {filtered.map((project) => (
+            <ProjectCard key={project.id} project={project} />
+          ))}
+        </div>
       </div>
     </section>
   );
-};
+}
