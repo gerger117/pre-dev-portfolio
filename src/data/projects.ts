@@ -54,7 +54,7 @@ export const projects: Project[] = [
     description:
       "A web-based hospital management system that manages patient records, streamlines hospital processes, and improves overall data organization.",
     tech: ["React", "TypeScript", "Node.js", "Supabase"],
-    link: "https://github.com/gerger117",
+    link: "https://suite-chef-73604418.figma.site/",
   },
   {
     id: 5,
@@ -65,7 +65,7 @@ export const projects: Project[] = [
     description:
       "A judging application that allows judges to input scores, manage criteria, and generate results efficiently for school events.",
     tech: ["Flutter", "Firebase"],
-    link: "https://github.com/gerger117",
+    link: "https://judging-system.vercel.app/",
   },
   {
     id: 6,
@@ -76,6 +76,6 @@ export const projects: Project[] = [
     description:
       "A cashier queuing system to efficiently manage customer flow and organize transactions, reducing waiting time and ensuring proper queue order.",
     tech: ["React", "TypeScript"],
-    link: "https://github.com/gerger117",
+    link: "https://queue-buddy-system-91.vercel.app/",
   },
 ];
