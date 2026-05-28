@@ -15,6 +15,11 @@ const navLinks = [
 export default function Navbar() {
   const { activeLink, setActiveLink } = useNavStore();
 
+  const handleContact = () => {
+    const section = document.querySelector("#contact");
+    section?.scrollIntoView({ behavior: "smooth" });
+  };
+
   useEffect(() => {
     const sections = navLinks
       .map((l) => document.querySelector(l.href))
@@ -84,7 +89,9 @@ export default function Navbar() {
       </ul>
 
       {/* CTA */}
-      <button className={styles.contactBtn}>Contact Me</button>
+      <button onClick={handleContact} className={styles.contactBtn}>
+        Contact Me
+      </button>
     </nav>
   );
 }
