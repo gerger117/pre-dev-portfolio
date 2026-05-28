@@ -18,6 +18,12 @@ export default function Hero() {
   const handleScrollDown = () => {
     document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
   };
+  const handleClick = () => {
+    window.location.href = "#projects";
+  };
+  const handleResume = () => {
+    window.location.href = "/Roger_Toquero_DCWDCV.pdf";
+  };
 
   return (
     <>
@@ -85,8 +91,12 @@ export default function Hero() {
 
         {/* CTA buttons */}
         <div className={styles.ctaRow}>
-          <button className={styles.btnPrimary}>Collaborate With Me</button>
-          <button className={styles.btnSecondary}>Discover My Works</button>
+          <button onClick={handleResume} className={styles.btnPrimary}>
+            Resume
+          </button>
+          <button onClick={handleClick} className={styles.btnSecondary}>
+            Discover My Works
+          </button>
         </div>
 
         {/* Happy Clients badge

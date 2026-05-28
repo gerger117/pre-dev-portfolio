@@ -9,6 +9,7 @@ const navLinks = [
   { label: "Projects", href: "#projects" },
   { label: "Certificate", href: "#certificates" },
   // { label: "FaQ", href: "#faq" },
+  // { label: "", href: "#resume" },
 ];
 
 export default function Navbar() {
@@ -70,7 +71,7 @@ export default function Navbar() {
         ))}
 
         {/* Resume — opens in new tab, not a scroll target */}
-        <li>
+        {/* <li>
           <a
             href="/Roger_Toquero_DCWDCV.pdf"
             target="_blank"
@@ -79,7 +80,7 @@ export default function Navbar() {
           >
             Resume
           </a>
-        </li>
+        </li> */}
       </ul>
 
       {/* CTA */}
