@@ -16,7 +16,7 @@ export default function Navbar() {
   const { activeLink, setActiveLink } = useNavStore();
 
   const handleContact = () => {
-    const section = document.querySelector("#contact");
+    const section = document.querySelector("#Contact");
     section?.scrollIntoView({ behavior: "smooth" });
   };
 
