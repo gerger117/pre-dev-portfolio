@@ -1,6 +1,11 @@
 import { style } from "@vanilla-extract/css";
 import { vars } from "../../styles/theme.css";
 
+const breakpoints = {
+  sm: "480px",
+  md: "768px",
+};
+
 export const card = style({
   display: "flex",
   flexDirection: "column",
@@ -18,6 +23,23 @@ export const card = style({
       transform: "translateY(-4px)",
     },
   },
+
+  "@media": {
+    [`screen and (max-width: ${breakpoints.md})`]: {
+      padding: "20px",
+      gap: 12,
+      borderRadius: 14,
+    },
+    [`screen and (max-width: ${breakpoints.sm})`]: {
+      padding: "16px",
+      // disable hover lift on touch devices — no hover state anyway
+      selectors: {
+        "&:hover": {
+          transform: "none",
+        },
+      },
+    },
+  },
 });
 
 export const image = style({
@@ -26,6 +48,12 @@ export const image = style({
   objectFit: "cover",
   borderRadius: 10,
   background: "rgba(255,255,255,0.04)",
+
+  "@media": {
+    [`screen and (max-width: ${breakpoints.sm})`]: {
+      height: 180, // slightly taller on single-column mobile for better preview
+    },
+  },
 });
 
 export const cardTop = style({
@@ -58,6 +86,12 @@ export const content = style({
   flexDirection: "column",
   gap: 10,
   flexGrow: 1,
+
+  "@media": {
+    [`screen and (max-width: ${breakpoints.sm})`]: {
+      gap: 8,
+    },
+  },
 });
 
 export const title = style({
@@ -67,6 +101,12 @@ export const title = style({
   color: vars.color.white,
   lineHeight: 1.3,
   margin: 0,
+
+  "@media": {
+    [`screen and (max-width: ${breakpoints.sm})`]: {
+      fontSize: "1rem",
+    },
+  },
 });
 
 export const usedAt = style({
@@ -84,6 +124,12 @@ export const description = style({
   color: vars.color.muted,
   margin: 0,
   flexGrow: 1,
+
+  "@media": {
+    [`screen and (max-width: ${breakpoints.sm})`]: {
+      fontSize: "0.88rem", // slightly larger for readability on phone
+    },
+  },
 });
 
 export const techStack = style({
@@ -109,6 +155,13 @@ export const cardLinks = style({
   paddingTop: 12,
   borderTop: "1px solid rgba(255,255,255,0.06)",
   marginTop: "auto",
+
+  "@media": {
+    [`screen and (max-width: ${breakpoints.sm})`]: {
+      gap: 16, // more space between links on touch
+      paddingTop: 14,
+    },
+  },
 });
 
 export const button = style({
@@ -121,6 +174,8 @@ export const button = style({
   color: vars.color.muted,
   textDecoration: "none",
   transition: "color 0.2s",
+  minHeight: 44, // touch target
+  minWidth: 44,
 
   selectors: {
     "&:hover": { color: vars.color.white },
@@ -137,6 +192,8 @@ export const demoLink = style({
   color: vars.color.purpleLight,
   textDecoration: "none",
   transition: "color 0.2s",
+  minHeight: 44, // touch target
+  minWidth: 44,
 
   selectors: {
     "&:hover": { color: vars.color.white },

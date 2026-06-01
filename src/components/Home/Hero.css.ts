@@ -1,17 +1,18 @@
 import { keyframes, style } from "@vanilla-extract/css";
 import { vars } from "../../styles/theme.css";
 
+const breakpoints = {
+  sm: "480px",
+  md: "768px",
+  lg: "1024px",
+};
+
 // ─── Keyframes ───────────────────────────────────────────────
 
 const fadeDown = keyframes({
   from: { opacity: 0, transform: "translateY(-24px)" },
   to: { opacity: 1, transform: "translateY(0)" },
 });
-
-// const fadeUp = keyframes({
-//   from: { opacity: 0, transform: "translate(-50%, 20px)" },
-//   to: { opacity: 1, transform: "translate(-50%, 0)" },
-// });
 
 const fadeIn = keyframes({
   from: { opacity: 0 },
@@ -21,6 +22,11 @@ const fadeIn = keyframes({
 const riseUp = keyframes({
   from: { opacity: 0, transform: "translateX(-50%) translateY(60px)" },
   to: { opacity: 1, transform: "translateX(-50%) translateY(0)" },
+});
+
+const riseUpMobile = keyframes({
+  from: { opacity: 0, transform: "translateY(40px)" },
+  to: { opacity: 1, transform: "translateY(0)" },
 });
 
 const floatIn = keyframes({
@@ -52,9 +58,17 @@ export const hero = style({
   paddingInline: 20,
 
   "@media": {
-    "screen and (max-width: 768px)": {
-      paddingTop: 120,
+    [`screen and (max-width: ${breakpoints.lg})`]: {
+      paddingInline: 16,
+    },
+    [`screen and (max-width: ${breakpoints.md})`]: {
+      paddingTop: 100,
       justifyContent: "flex-start",
+      paddingBottom: 180, // room for absolute bottom elements
+    },
+    [`screen and (max-width: ${breakpoints.sm})`]: {
+      paddingTop: 80,
+      paddingBottom: 160,
     },
   },
 });
@@ -82,9 +96,12 @@ export const heroText = style({
   marginTop: "-120px",
 
   "@media": {
-    "screen and (max-width: 768px)": {
+    [`screen and (max-width: ${breakpoints.md})`]: {
       marginTop: 0,
-      paddingTop: 40,
+      paddingTop: 24,
+    },
+    [`screen and (max-width: ${breakpoints.sm})`]: {
+      paddingTop: 16,
     },
   },
 });
@@ -92,7 +109,7 @@ export const heroText = style({
 export const heroGreeting = style({
   fontFamily: vars.font.ui,
   fontWeight: 700,
-  fontSize: "clamp(2.5rem, 12vw, 7.8rem)",
+  fontSize: "clamp(2.2rem, 12vw, 7.8rem)",
   letterSpacing: "-0.01em",
   lineHeight: 1.1,
   color: vars.color.white,
@@ -103,7 +120,7 @@ export const heroTitle = style({
   fontFamily: vars.font.display,
   fontStyle: "italic",
   fontWeight: 700,
-  fontSize: "clamp(3.4rem, 9vw, 7.8rem)",
+  fontSize: "clamp(2.8rem, 9vw, 7.8rem)",
   color: "rgba(255,255,255,0.15)",
   letterSpacing: "-0.02em",
   lineHeight: 1,
@@ -119,23 +136,29 @@ export const personWrap = style({
   left: "50%",
   transform: "translateX(-50%)",
   zIndex: 3,
-  width: "clamp(240px, 70vw, 600px)",
-
-  "@media": {
-    "screen and (max-width: 768px)": {
-      position: "relative",
-      left: "auto",
-      transform: "none",
-      width: "85%",
-      marginTop: 40,
-    },
-  },
+  width: "clamp(220px, 70vw, 600px)",
   pointerEvents: "none",
   animation: `${riseUp} 0.9s 0.2s cubic-bezier(0.22,1,0.36,1) both`,
-  // add these:
   background: "transparent",
   border: "none",
   outline: "none",
+
+  "@media": {
+    [`screen and (max-width: ${breakpoints.md})`]: {
+      position: "relative",
+      left: "auto",
+      transform: "none",
+      width: "75%",
+      maxWidth: 320,
+      margin: "32px auto 0",
+      animation: `${riseUpMobile} 0.9s 0.2s cubic-bezier(0.22,1,0.36,1) both`,
+    },
+    [`screen and (max-width: ${breakpoints.sm})`]: {
+      width: "70%",
+      maxWidth: 260,
+      marginTop: 24,
+    },
+  },
 });
 
 export const personPlaceholder = style({
@@ -171,6 +194,13 @@ export const pill = style({
   color: "rgba(255,255,255,0.88)",
   letterSpacing: "0.02em",
   whiteSpace: "nowrap",
+
+  "@media": {
+    [`screen and (max-width: ${breakpoints.sm})`]: {
+      padding: "7px 14px",
+      fontSize: "0.72rem",
+    },
+  },
 });
 
 export const pill1 = style({
@@ -179,18 +209,27 @@ export const pill1 = style({
   animation: `${floatIn} 0.6s 0.4s ease both, ${floatY} 4s 1.2s ease-in-out infinite`,
 
   "@media": {
-    "screen and (max-width: 768px)": {
+    // hide on mobile — too crowded alongside stacked layout
+    [`screen and (max-width: ${breakpoints.md})`]: {
       display: "none",
     },
   },
 });
+
 export const pill2 = style({
   top: "36%",
   right: "13%",
   animation: `${floatIn} 0.6s 0.5s ease both, ${floatY} 4s 1.6s ease-in-out infinite`,
 
   "@media": {
-    "screen and (max-width: 768px)": { right: "4%" },
+    [`screen and (max-width: ${breakpoints.md})`]: {
+      top: "auto",
+      bottom: "38%",
+      right: "4%",
+    },
+    [`screen and (max-width: ${breakpoints.sm})`]: {
+      display: "none",
+    },
   },
 });
 
@@ -200,7 +239,14 @@ export const pill3 = style({
   animation: `${floatIn} 0.6s 0.6s ease both, ${floatY} 4s 1.2s ease-in-out infinite`,
 
   "@media": {
-    "screen and (max-width: 768px)": { left: "4%" },
+    [`screen and (max-width: ${breakpoints.md})`]: {
+      top: "auto",
+      bottom: "28%",
+      left: "4%",
+    },
+    [`screen and (max-width: ${breakpoints.sm})`]: {
+      display: "none",
+    },
   },
 });
 
@@ -210,7 +256,14 @@ export const pill4 = style({
   animation: `${floatIn} 0.6s 0.65s ease both, ${floatY} 4s 1.6s ease-in-out infinite`,
 
   "@media": {
-    "screen and (max-width: 768px)": { right: "4%" },
+    [`screen and (max-width: ${breakpoints.md})`]: {
+      top: "auto",
+      bottom: "18%",
+      right: "4%",
+    },
+    [`screen and (max-width: ${breakpoints.sm})`]: {
+      display: "none",
+    },
   },
 });
 
@@ -250,9 +303,15 @@ export const scrollPill = style({
   },
 
   "@media": {
-    "screen and (max-width: 768px)": {
+    [`screen and (max-width: ${breakpoints.md})`]: {
       left: 20,
-      bottom: 130,
+      bottom: 100,
+      width: 58,
+      height: 58,
+    },
+    [`screen and (max-width: ${breakpoints.sm})`]: {
+      // hide on very small screens — saves space, CTA buttons are enough
+      display: "none",
     },
   },
 });
@@ -274,14 +333,19 @@ export const ctaRow = style({
   zIndex: 5,
   display: "flex",
   gap: 14,
-  width: "100%",
+  width: "max-content",
   justifyContent: "center",
 
   "@media": {
-    "screen and (max-width: 768px)": {
+    [`screen and (max-width: ${breakpoints.md})`]: {
+      bottom: 32,
+      width: "calc(100% - 40px)",
+    },
+    [`screen and (max-width: ${breakpoints.sm})`]: {
       flexDirection: "column",
-      width: "90%",
-      bottom: 30,
+      width: "calc(100% - 32px)",
+      bottom: 24,
+      gap: 10,
     },
   },
 });
@@ -299,11 +363,20 @@ export const btnPrimary = style({
   letterSpacing: "0.02em",
   boxShadow: `0 0 32px ${vars.color.purpleGlow}`,
   transition: "background 0.2s, transform 0.15s",
+  minHeight: 44,
 
   selectors: {
     "&:hover": {
       background: vars.color.purpleLight,
       transform: "translateY(-2px)",
+    },
+  },
+
+  "@media": {
+    [`screen and (max-width: ${breakpoints.sm})`]: {
+      width: "100%",
+      padding: "14px 24px",
+      textAlign: "center",
     },
   },
 });
@@ -320,11 +393,20 @@ export const btnSecondary = style({
   cursor: "pointer",
   letterSpacing: "0.02em",
   transition: "background 0.2s, transform 0.15s",
+  minHeight: 44,
 
   selectors: {
     "&:hover": {
       background: "#fff",
       transform: "translateY(-2px)",
+    },
+  },
+
+  "@media": {
+    [`screen and (max-width: ${breakpoints.sm})`]: {
+      width: "100%",
+      padding: "14px 24px",
+      textAlign: "center",
     },
   },
 });
@@ -342,9 +424,15 @@ export const clientsBadge = style({
   animation: `${fadeIn} 0.8s 0.9s both`,
 
   "@media": {
-    "screen and (max-width: 768px)": {
+    [`screen and (max-width: ${breakpoints.md})`]: {
       right: 20,
-      bottom: 130,
+      bottom: 100,
+    },
+    [`screen and (max-width: ${breakpoints.sm})`]: {
+      // move above the stacked CTA buttons on small phones
+      bottom: 170,
+      right: "50%",
+      transform: "translateX(50%)",
     },
   },
 });
@@ -393,6 +481,12 @@ export const clientsCount = style({
   color: vars.color.white,
   fontFamily: vars.font.ui,
   letterSpacing: "-0.02em",
+
+  "@media": {
+    [`screen and (max-width: ${breakpoints.sm})`]: {
+      fontSize: "1.2rem",
+    },
+  },
 });
 
 export const clientsLabel = style({

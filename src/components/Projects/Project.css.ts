@@ -1,6 +1,12 @@
 import { keyframes, style } from "@vanilla-extract/css";
 import { vars } from "../../styles/theme.css";
 
+const breakpoints = {
+  sm: "480px",
+  md: "768px",
+  lg: "1024px",
+};
+
 const fadeUp = keyframes({
   from: { opacity: 0, transform: "translateY(32px)" },
   to: { opacity: 1, transform: "translateY(0)" },
@@ -31,7 +37,16 @@ export const section = style({
   },
 
   "@media": {
-    "screen and (max-width: 768px)": { padding: "80px 20px" },
+    [`screen and (max-width: ${breakpoints.lg})`]: {
+      padding: "100px 36px",
+    },
+    [`screen and (max-width: ${breakpoints.md})`]: {
+      padding: "80px 20px",
+      justifyContent: "flex-start",
+    },
+    [`screen and (max-width: ${breakpoints.sm})`]: {
+      padding: "72px 16px",
+    },
   },
 });
 
@@ -43,6 +58,15 @@ export const inner = style({
   display: "flex",
   flexDirection: "column",
   gap: 48,
+
+  "@media": {
+    [`screen and (max-width: ${breakpoints.md})`]: {
+      gap: 36,
+    },
+    [`screen and (max-width: ${breakpoints.sm})`]: {
+      gap: 28,
+    },
+  },
 });
 
 export const header = style({
@@ -65,7 +89,7 @@ export const heading = style({
   fontFamily: vars.font.display,
   fontStyle: "italic",
   fontWeight: 700,
-  fontSize: "clamp(2.2rem, 5vw, 3.8rem)",
+  fontSize: "clamp(2rem, 5vw, 3.8rem)",
   lineHeight: 1.1,
   letterSpacing: "-0.02em",
   color: vars.color.white,
@@ -83,6 +107,12 @@ export const filters = style({
   display: "flex",
   gap: 10,
   flexWrap: "wrap",
+
+  "@media": {
+    [`screen and (max-width: ${breakpoints.sm})`]: {
+      gap: 8,
+    },
+  },
 });
 
 export const filterBtn = style({
@@ -96,11 +126,20 @@ export const filterBtn = style({
   color: vars.color.muted,
   cursor: "pointer",
   transition: "all 0.2s",
+  // min touch target height
+  minHeight: 44,
 
   selectors: {
     "&:hover": {
       borderColor: vars.color.purpleCore,
       color: vars.color.white,
+    },
+  },
+
+  "@media": {
+    [`screen and (max-width: ${breakpoints.sm})`]: {
+      padding: "7px 16px",
+      fontSize: "0.78rem",
     },
   },
 });
@@ -118,7 +157,17 @@ export const grid = style({
   gap: 20,
 
   "@media": {
-    "screen and (max-width: 1024px)": { gridTemplateColumns: "repeat(2, 1fr)" },
-    "screen and (max-width: 600px)": { gridTemplateColumns: "1fr" },
+    [`screen and (max-width: ${breakpoints.lg})`]: {
+      gridTemplateColumns: "repeat(2, 1fr)",
+      gap: 16,
+    },
+    [`screen and (max-width: ${breakpoints.md})`]: {
+      gridTemplateColumns: "repeat(2, 1fr)",
+      gap: 14,
+    },
+    [`screen and (max-width: ${breakpoints.sm})`]: {
+      gridTemplateColumns: "1fr",
+      gap: 14,
+    },
   },
 });
